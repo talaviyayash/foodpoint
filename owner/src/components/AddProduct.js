@@ -43,7 +43,6 @@ export default function AddProduct() {
     
 
     const sendProductData = async () => {
-        console.log(category)
         try {
             const data = {
                 name: productName,

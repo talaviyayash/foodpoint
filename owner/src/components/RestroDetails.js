@@ -27,6 +27,7 @@ export default function RestroDetails() {
         for(var i = 0 ; i <img.length;i++){
             formData.append("restaurant",img[i])
             }
+            
         formData.append('name', resturant);
         formData.append('fulladdress', address);
         formData.append('area', area);
@@ -78,7 +79,7 @@ export default function RestroDetails() {
                                     <div className="mt-2 m-0">
                                         <p className='mb-0'>Restaurant Name</p>
                                         <input type="text" className='py-2 px-2 border rounded' value={resturant}
-                                            placeholder='Resturant Name' onChange={(e) => {setResturant(e.target.value)}}
+                                            placeholder='Resturant Name' minLength="8" onChange={(e) => {setResturant(e.target.value)}}
                                         />
                                     </div>
                                     <div className="mt-2 m-0">

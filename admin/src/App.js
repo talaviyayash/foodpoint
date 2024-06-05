@@ -47,14 +47,14 @@ function App() {
         <Routes>
           {!login ? (<Route path='/' element={<Login />} />) : (<>
             <Route path='/Dashboard' element={<Dashboard />} />
-            <Route path='/Orders' element={<Orders />} />
-            <Route path='/Orderdetails' element={<Orderdetails />} />
+            <Route path='/Orders/' element={<Orders />} />
+            <Route path='/Orderdetails/:orderId' element={<Orderdetails />} />
             <Route path='/Customers' element={<Customers />} />
             <Route path='/DeliveryPartner' element={<DeliveryPartner />} />
             <Route path='/Category' element={<Category />} />
             <Route path='/Request' element={<Request />} />
             <Route path='/Restaurant' element={<Restaurant />} />
-            <Route path='/Restaurantdetails' element={<Restaurantdetails />} />
+            <Route path='/Restaurantdetails/:restroId' element={<Restaurantdetails />} />
             <Route path='/ContactUs' element={<ContactUs />} />
             <Route path='/Createadmin' element={<Createadmin />} />
             <Route path='/Login' element={<Login />} />

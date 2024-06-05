@@ -13,22 +13,22 @@ import ContactUs from './components/ContactUs';
 import Profile from './components/Profile';
 import Sorry from './components/Sorry'
 import RestroDetails from './components/RestroDetails';
+import OtpVerification from './components/OtpVerification';
 
 function App() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useSelector(state => state.restaurant.login)
-  const isApproved = useSelector(state => state.restaurant.isApproved)
-
+  const isApproved = useSelector(state => state.restaurant.RestaurantInfo.isApproved)
+  // console.log(isApproved)
+  const isVerified = useSelector(state => state.restaurant?.RestaurantInfo.isVerified)
+// console.log(isVerified)
   const refresh = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/Restaurant/refresh', {}, { withCredentials: true });
       if (response.data.login === true) {
-        // console.log(response)
-        // console.log(response.data)
-        dispatch(setRestroDetails(response.data))
-        // navigate('/Home')
+        await dispatch(setRestroDetails(response.data))
       }
       else {
         navigate('/')
@@ -40,8 +40,8 @@ function App() {
   }
   useEffect(() => {
     refresh()
-    console.log(login)
-    console.log(isApproved)
+    // console.log(login)
+    // console.log(isApproved)
   }, [])
   return (
     <>
@@ -49,19 +49,38 @@ function App() {
         {!login ?
           <>
             <Route path='/' element={<Login />} />
+            <Route path='*' element={<Login />} />
             <Route path='/SignUp' element={<SignUp />} />
-          </>
-          :
-          // isApproved === "Pending"
+            {/* <Route path='/RestroDetails' element={<RestroDetails />} /> */}
+
+          </> :
           <>
-            <Route path='/' element={<Login />} />
-            <Route path='/Home' element={<Home />} />
-            <Route path='/OrderList' element={<OrderList />} />
-            <Route path='/AddProduct' element={<AddProduct />} />
-            <Route path='/YourProducts' element={<YourProducts />} />
-            <Route path='/ContactUs' element={<ContactUs />} />
-            <Route path='/Profile' element={<Profile />} />
-            <Route path='/RestroDetails' element={<RestroDetails />} />
+            {
+              isVerified ?(
+              isApproved === "Pending" ?
+                <>
+                  {/* <Route path='/' element={<Login />} /> */}
+                  {/* <Route path='/SignUp' element={<SignUp />} /> */}
+                  <Route path='/Home' element={<Home />} />
+                  <Route path='/ContactUs' element={<ContactUs />} />
+                  <Route path='/Profile' element={<Profile />} />
+                  <Route path='/Information' element={<Sorry />} />
+                  <Route path='/RestroDetails' element={<RestroDetails />} />
+                </> : <>
+                  <Route path='/' element={<Login />} />
+                  <Route path='/SignUp' element={<SignUp />} />
+                  <Route path='/Home' element={<Home />} />
+                  <Route path='/OrderList' element={<OrderList />} />
+                  <Route path='/AddProduct' element={<AddProduct />} />
+                  <Route path='/YourProducts' element={<YourProducts />} />
+                  <Route path='/ContactUs' element={<ContactUs />} />
+                  <Route path='/Profile' element={<Profile />} />
+                  <Route path='/RestroDetails' element={<RestroDetails />} />
+                </>):
+                (
+            <Route path='*' element={<OtpVerification />} />
+                )
+            }
           </>
         }
       </Routes>

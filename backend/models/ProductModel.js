@@ -7,10 +7,10 @@ const ProductSchema = new mongoose.Schema({
     price: {
         type:Number
     },
-    img:[
+    img:
         {type:String}
-    ],
-    resturnat: {
+    ,
+    restaurant: {
         type: mongoose.Types.ObjectId,
         ref:'Restaurant'  
     },
@@ -22,13 +22,10 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         default:0
     },
-    review: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: 'Review'
-        }
-    ],
-   
+     totlaReview:{
+        type:Number,
+        default:0
+    },
     description: {
         type:String
     },

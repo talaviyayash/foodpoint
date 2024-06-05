@@ -71,7 +71,7 @@ export default function Dashboard() {
                         </div>
                     </div >
 
-                    <div className="row row2 ">
+                    <div className="row row2 mb-5">
                         <div className="container-fluid mt-5 m-0 p-0 ">
 
                             <div className='container-fluid mt-4 px-3 py-3 m-auto cards'>
@@ -84,19 +84,19 @@ export default function Dashboard() {
 
                                 <div className='card text-start'>
                                     <img src="https://www.svgrepo.com/show/413888/eat.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(254, 201, 15)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.ExistsResturant}</p>
+                                    <p className='mt-3 ms-4 fw-bold'>{details.ExistsRestaurant}</p>
                                     <p className='ms-4 font-light-thick'>Restaurants</p>
                                 </div>
                                 
                                 <div className='card text-start'>
                                     <img src="https://www.svgrepo.com/show/156232/restaurant-table-and-chairs.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(59 130 246 / 0.5)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.ExistsResturant}</p>
+                                    <p className='mt-3 ms-4 fw-bold'>{details.ExistsRestaurant}</p>
                                     <p className='ms-4 font-light-thick'>Active Restaurants</p>
                                 </div>
 
                                 <div className='card text-start'>
                                     <img src="https://www.svgrepo.com/show/156232/restaurant-table-and-chairs.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(252, 228, 236)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.InActiveResturant}</p>
+                                    <p className='mt-3 ms-4 fw-bold'>{details.InActiveRestaurant}</p>
                                     <p className='ms-4 font-light-thick'>Inctive Restaurants</p>
                                 </div>
 
@@ -124,33 +124,28 @@ export default function Dashboard() {
                                     <p className='ms-4 font-light-thick'>Categories</p>
                                 </div>
 
-                                <div className='card text-start'>
-                                    <img src="https://www.svgrepo.com/show/451289/select-category.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(255, 252, 224)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.ActiveCategory}</p>
-                                    <p className='ms-4 font-light-thick'>Active Categories</p>
-                                </div>
-
-                                <div className='card text-start'>
-                                    <img src="https://www.svgrepo.com/show/496037/category-2.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(235, 250, 242)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.InActiveCategory}</p>
-                                    <p className='ms-4 font-light-thick'>Inctive Categories</p>
-                                </div>
+                                
 
                                 <div className='card text-start'>
                                     <img src="https://www.svgrepo.com/show/422038/product.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(234, 242, 254)' }} />
                                     <p className='mt-3 ms-4 fw-bold'>{details.ExistsProduct}</p>
                                     <p className='ms-4 font-light-thick'>Total Products</p>
                                 </div>
+                                <div className='card text-start'>
+                                    <img src="https://www.svgrepo.com/show/451289/select-category.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(255, 252, 224)' }} />
+                                    <p className='mt-3 ms-4 fw-bold'>{details.ActiveProduct}</p>
+                                    <p className='ms-4 font-light-thick'>Active Products</p>
+                                </div>
 
                                 <div className='card text-start'>
-                                    <img src="https://www.svgrepo.com/show/433697/product-so.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(222 220 221)' }} />
-                                    <p className='mt-3 ms-4 fw-bold'>{details.ActiveProduct}</p>
-                                    <p className='ms-4 font-light-thick'>Deactive Products</p>
+                                    <img src="https://www.svgrepo.com/show/496037/category-2.svg" className='img-logo mt-4 ms-3' alt="" style={{ backgroundColor: 'rgb(235, 250, 242)' }} />
+                                    <p className='mt-3 ms-4 fw-bold'>{details.ExistsProduct - details.ActiveProduct}</p>
+                                    <p className='ms-4 font-light-thick'>Inctive Products</p>
                                 </div>
                                 
                             </div>
 
-                            <div className='customers w-50 border ms-4 p-4 mt-4 mb-5 rounded box-shadow'>
+                            {/* <div className='customers w-50 border ms-4 p-4 mt-4 mb-5 rounded box-shadow'>
                                 <div className="row">
                                     <h4>Latest Customers</h4>
                                 </div>
@@ -203,7 +198,7 @@ export default function Dashboard() {
                                         <p>dhruv09@gmail.com</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

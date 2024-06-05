@@ -18,14 +18,14 @@ const userSchema = mongoose.Schema({
     }
     ,number: {
         type: String,
+    },isVerified: {
+        type : Boolean,
+        default : false
     },
-    order: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: 'Order'
-        }
-    ],
-    efreshToken :{
+    varifiedCode :{
+        type: Number,
+    },
+    refreshToken :{
         type: String,
         default :""
     }
@@ -70,4 +70,4 @@ userSchema.methods.generateRefreshToken = async function(){
 }
 
 
-export default mongoose.model('student',userSchema)
+export default mongoose.model('user',userSchema)

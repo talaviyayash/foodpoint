@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { UseDispatch, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios'
 import '../css/Login.css';
 import { setUserDetails } from '../redux/features/userSlice'
@@ -11,8 +11,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [details, setDetails] = useState({});
-
+    const [showError, setShowError] = useState("")
     const data = {
         email: email,
         password: password,
@@ -20,26 +19,27 @@ const Login = () => {
 
     const getdata = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/user/signin', data);
-            // console.log(details)
-            if (!response.data.loginUser) {
-                alert("Pleas Enter valid detail!")
+            const response = await axios.post('http://localhost:5000/api/user/signin', data,{ withCredentials: true});
+            // console.log(response.data)
+            if (response.data.login === true) {
+                localStorage.setItem('resfreshToken', response.data.refreshToken);
+                dispatch(setUserDetails(response.data))
+                navigate('/Home')
             }
-            else {
-                setDetails(response.data.loginUser)
-                console.log(details);
-                dispatch(setUserDetails(response.data.loginUser))
-                navigate('/')
+            else{
+                setShowError("Email or Password is incorrect.")
             }
+
         } catch (error) {
-            console.error('Error fetching data:' ,error);
+            console.error('Error login !', error);
         }
     }
-
-    const handleSubmit = (event) => {
+    const useinfo = useSelector(state => state.user)
+    const handleSubmit = async (event) => {
         event.preventDefault();
         getdata()
-    };
+        // console.log(useinfo)
+    }
 
     return (
         <div className="login-page">
@@ -66,7 +66,9 @@ const Login = () => {
                             required
                         />
                     </div>
+                    <p className='text-danger'>{showError}</p>
                     <button type="submit">Log In</button>
+                    <small className=''>Don't have account? <Link to={'/SignUp'}>Create One</Link></small>
                 </form>
             </div>
         </div>

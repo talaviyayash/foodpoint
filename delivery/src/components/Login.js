@@ -11,8 +11,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [details, setDetails] = useState({});
-
+    const [errorEmail, setErrorEmail] =useState("")
     const data = {
         email: email,
         password: password,
@@ -20,14 +19,15 @@ const Login = () => {
 
     const getdata = async () => {
         try {
+            setErrorEmail('')
             const response = await axios.post('http://localhost:5000/api/delivery/signin', data,{withCredentials:true});
-            console.log(response.data)
+            // console.log(response.data)
             if (response.data.login === true) {
                 dispatch(setdeliverDetails(response.data))
                 navigate('/Home')
             }
             else {
-                alert("Your Email Id and Password are incorrect!")
+                setErrorEmail("Incorrect Email Id or Password!")
             }
         } catch (error) {
             console.log('Error fetching data:' , error);
@@ -50,7 +50,7 @@ const Login = () => {
                         <input
                             type="email"
                             id="email"
-                            className='w-100'
+                            className='w-100 border border-1 border-secondary rounded p-2'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -61,13 +61,14 @@ const Login = () => {
                         <input
                             type="password"
                             id="password"
-                            className='w-100'
+                            className='w-100 border border-1 border-secondary rounded p-2'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
-                    <button type="submit" className='w-100 mt-3 mb-2  btn btn-outline-danger'>Log In</button>
+                    <p className='text-danger mb-0'>{errorEmail}</p>
+                    <button type="submit" className='w-100 mt-3 mb-2 btn btn-outline-danger'>Log In</button>
                     <small className=''>Don't have account? <Link to={'/SignUp'}>Create One</Link></small>
                 </form>
             </div>

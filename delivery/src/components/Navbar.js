@@ -1,34 +1,60 @@
 import { Link, useLocation } from 'react-router-dom'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import '../css/Util.css'
 import '../css/Navbar.css'
 
 export default function Navbar() {
 
+  const isApproved = useSelector(state => state.deliver.deliverInfo.deliveryBoyInfo.isApproved)
   const location = useLocation()
   const path = location.pathname
+  // const [path,setPath] = (location.pathname)
+
   const changeBgColor = () => {
     // console.log(path)
     if (path === '/Home') {
-      let cComponent = document.querySelector("#Home")
-      cComponent.classList.add('bg-navitem')
+      let cComponents = document.querySelectorAll(".Home")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
     }
     else if (path === '/OrderList') {
-      let cComponent = document.querySelector("#OrderList")
-      cComponent.classList.add('bg-navitem')
+      let cComponents = document.querySelectorAll(".OrderList")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
+    }
+    else if (path === '/OrderHistory') {
+      let cComponents = document.querySelectorAll(".OrderHistory")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
     }
     else if (path === '/ContactUs') {
-      let cComponent = document.querySelector("#ContactUs")
-      cComponent.classList.add('bg-navitem')
+      let cComponents = document.querySelectorAll(".ContactUs")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
     }
     else if (path === '/Profile') {
-      let cComponent = document.querySelector("#Profile")
-      cComponent.classList.add('bg-navitem')
+      let cComponents = document.querySelectorAll(".Profile")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
+    }
+    else if (path === '/Information') {
+      let cComponents = document.querySelectorAll(".Information")
+      cComponents.forEach(function(cComponent) {
+        cComponent.classList.add('bg-navitem');
+      });
     }
   }
-  
+
   useEffect(() => {
     changeBgColor()
+    // console.log(isApproved) 
+    // console.log(path)
   }, [path])
 
   return (
@@ -42,9 +68,26 @@ export default function Navbar() {
               <i className="bi bi-list"></i>
             </button>
             <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="/">Action</a></li>
-              <li><a className="dropdown-item" href="/">Another action</a></li>
-              <li><a className="dropdown-item" href="/">Something else here</a></li>
+            <Link to='/Home' className='text-dark text-decoration-none'>
+              <li className='p-2 rounded rounded-3 mx-3 Home' id='Home' onClick={() => changeBgColor("Home")}>Home</li>
+            </Link>
+            {(isApproved !== 'pending') && <>
+              <Link to='/OrderList' className='text-dark text-decoration-none'>
+                <li className='p-2 rounded rounded-3 mx-3 OrderList' id='OrderList' onClick={() => changeBgColor("OrderList")}>Order List</li>
+              </Link>
+              <Link to='/OrderHistory' className='text-dark text-decoration-none'>
+                <li className='p-2 rounded rounded-3 mx-3 OrderHistory' id='OrderHistory' onClick={() => changeBgColor("OrderHistory")}>Order History</li>
+              </Link>
+            </>}
+            {isApproved==='pending' && <Link to='/Information' className='text-dark text-decoration-none'>
+              <li className='p-2 rounded rounded-3 Information' id='Information' onClick={changeBgColor}>Information</li>
+            </Link>}
+            <Link to='/ContactUs' className='text-dark text-decoration-none'>
+              <li className='p-2 rounded rounded-3 mx-3 ContactUs' id='ContactUs' onClick={changeBgColor}>Contact Us</li>
+            </Link>
+            <Link to='/Profile' className='text-dark text-decoration-none'>
+              <li className='p-2 rounded rounded-3 mx-3 Profile' id='Profile' onClick={changeBgColor}>Profile</li>
+            </Link>
             </ul>
           </div>
         </div>
@@ -59,32 +102,39 @@ export default function Navbar() {
         <div className='col-8  d-md-block d-none'>
           <div className='d-flex justify-content-center'>
             <Link to='/Home' className='text-dark text-decoration-none'>
-              <li className='p-2 rounded rounded-3 mx-3' id='Home' onClick={() => changeBgColor("Home")}>Home</li>
+              <li className='p-2 rounded rounded-3 mx-3 Home' id='Home' onClick={() => changeBgColor()}>Home</li>
             </Link>
-            {/* <li className='p-2 rounded rounded-3'>Search</li> */}
-            <Link to='/OrderList' className='text-dark text-decoration-none'>
-              <li className='p-2 rounded rounded-3 mx-3' id='OrderList' onClick={() => changeBgColor("OrderList")}>Order List</li>
-            </Link>
+            {(isApproved !== 'pending') && <>
+              <Link to='/OrderList' className='text-dark text-decoration-none'>
+                <li className='p-2 rounded rounded-3 mx-3 OrderList' id='OrderList' onClick={() => changeBgColor()}>Order List</li>
+              </Link>
+              <Link to='/OrderHistory' className='text-dark text-decoration-none'>
+                <li className='p-2 rounded rounded-3 mx-3 OrderHistory' id='OrderHistory' onClick={() => changeBgColor()}>Order History</li>
+              </Link>
+            </>}
+            {isApproved==='pending' && <Link to='/Information' className='text-dark text-decoration-none'>
+              <li className='p-2 rounded rounded-3 Information' id='Information' onClick={changeBgColor}>Information</li>
+            </Link>}
             <Link to='/ContactUs' className='text-dark text-decoration-none'>
-              <li className='p-2 rounded rounded-3 mx-3' id='ContactUs' onClick={changeBgColor}>Contact Us</li>
+              <li className='p-2 rounded rounded-3 mx-3 ContactUs' id='ContactUs' onClick={changeBgColor}>Contact Us</li>
             </Link>
             <Link to='/Profile' className='text-dark text-decoration-none'>
-              <li className='p-2 rounded rounded-3 mx-3' id='Profile' onClick={changeBgColor}>Profile</li>
+              <li className='p-2 rounded rounded-3 mx-3 Profile' id='Profile' onClick={changeBgColor}>Profile</li>
             </Link>
           </div>
         </div>
 
         <div className='col-2  d-flex justify-content-center'>
-          <div className="dropdown d-inline">
-            <button className="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className="bi bi-person px-1 fs-3 text-dark rounded rounded-circle" style={{ backgroundColor: 'rgb(255, 241, 107)' }}></i>
-            </button>
-            <ul className="dropdown-menu">
+          {/* <div className="dropdown d-inline"> */}
+            {/* <button className="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"> */}
+              <Link to='/Profile'><i className="bi bi-person px-1 fs-3 text-dark rounded rounded-circle" style={{ backgroundColor: 'rgb(255, 241, 107)' }}></i></Link>
+            {/* </button> */}
+            {/* <ul className="dropdown-menu">
               <li><a className="dropdown-item" href="/">Action</a></li>
               <li><a className="dropdown-item" href="/">Another action</a></li>
               <li><a className="dropdown-item" href="/">Something else here</a></li>
-            </ul>
-          </div>
+            </ul> */}
+          {/* </div> */}
         </div>
 
       </div>

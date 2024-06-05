@@ -1,4 +1,4 @@
-import { CreateRestaurant , LoginRestaurant  ,FetchAll,UpdateRestaurant,FeatchRestaurant , DeleteRestaurant,RefreshTokenEndPoint } from '../controller/ResturantCtrl.js';
+import {otpGenerate,verifyOtp, approvedRestaurant,CreateRestaurant,topRestaurant,allDetailAboutRestaurants , LoginRestaurant  ,FetchAll,UpdateRestaurant,FeatchRestaurant , DeleteRestaurant,RefreshTokenEndPoint } from '../controller/RestaurantCtrl.js';
 import { upload} from '../middleware/multerMiddleware.js'
 import { Router } from 'express';
 
@@ -18,9 +18,13 @@ router.route('/update').post(upload.fields([
     }
 ]),UpdateRestaurant)
 router.route('/allapproved').get(FeatchRestaurant)
+router.route('/toprestaurant').get(topRestaurant)
 router.route('/delete').post(DeleteRestaurant)
 router.route('/refresh').post(RefreshTokenEndPoint)
-
+router.route('/alldetail').post(allDetailAboutRestaurants)
+router.route('/approve').post(approvedRestaurant)
+router.route('/otpGenerate').post(otpGenerate)
+router.route('/otpverify').post(verifyOtp)
 
 
 export default router

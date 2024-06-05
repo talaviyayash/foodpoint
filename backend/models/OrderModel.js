@@ -1,6 +1,5 @@
 import mongoose , {Schema} from "mongoose";
 
-
 const OrderSchema = new Schema({
     products: {
             product: {
@@ -13,52 +12,52 @@ const OrderSchema = new Schema({
                   min:1
             },
           },
-    customer: {
+    user: {
         type: mongoose.Types.ObjectId,
         ref:'User'
     },
-    payment: {
-        type: String,
-    },
-    total: {
-        type:Number,
-    },
-    Restaurant: {
+    restaurant: {
         type: mongoose.Types.ObjectId,
         ref:'Restaurant'
     },
     status: {
         type: String,
-        default:'process'
+        default:'pending'
     },
     deliveryBoy: {
         type: mongoose.Types.ObjectId,
         ref:'DeliverBoy'
     },
     address: 
-        {    area: {
-                type: String,
-            },
+        {    
+            type : String,
     },
-    RestaurantReview: {
-        type: mongoose.Types.ObjectId,
-        ref:"Review"
-    },
-    deliveryBoyReview: {
-        type: mongoose.Types.ObjectId,
-        ref:'Review'
-    },
-      isreviewGiven:{
-        forRestaurant:{
-            type:Boolean,
-            default:false
+    payment: {
+        razorpay_payment_id:{
+            type : String
         },
-        forDeliveryBoy:{
-            type:Boolean,
-            default:false
+        razorpay_order_id:{
+            type : String
+        },       
+         razorpay_signature:{
+            type : String
+        },
+        payment :{
+            type : Boolean,
+            default : true
         }
     },
-    
+    total: {
+        type:Number,
+    },
+      isreviewGiven:{
+        type : Boolean,
+        default : false
+    },
+    rating:{
+        type : Number,
+        default : 0
+    }
 },{
     timestamps : true,
 })

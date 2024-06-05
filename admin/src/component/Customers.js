@@ -10,6 +10,7 @@ export default function Customer() {
 
   const adminName = useSelector(state => state.admin.adminInfo.name)
 
+  //SIDEBAR AND MAINCOMPONENT MOVEMENT FUNCTIONS IN SCREEN WISE
   const hide = () => {
     if (window.innerWidth <= 750) {
       let sidebar, slide, main, title
@@ -43,30 +44,7 @@ export default function Customer() {
     title = document.querySelector(".header")
     title.classList.toggle("headerMove")
   }
-  // const User = [
-  //   {
-  //     "_id": "65dd909a7dc90597113c56ff",
-  //     "name": "zxc",
-  //     "email": "dhruvna9@gmail.com",
-  //     "password": "$2b$04$.exGBa2EHvgRIC6V7QSJGe3cTBcOaQU6y2w8M7Rtk5wVdTnIHak1W",
-  //     "number": "81222",
-  //     "order": [{ name: "dhruv" }, { name: "om" }],
-  //     "createdAt": "2024-02-27T07:34:50.936Z",
-  //     "updatedAt": "2024-02-27T07:34:50.936Z",
-  //     "__v": 0
-  //   },
-  //   {
-  //     "_id": "65dd92b37dc90597113c5708",
-  //     "name": "qwe",
-  //     "email": "qwe@gmail.com",
-  //     "password": "$2b$04$Vtk1Fylg9Z3HV/ojPBWw9O26QgrKQB0JsPhFWidh0GQxvFgAWL2dC",
-  //     "number": "123",
-  //     "order": [{ name: "dhruv" }, { name: "om" }, { name: "dhruva" }, { name: "oma" }],
-  //     "createdAt": "2024-02-27T07:43:47.369Z",
-  //     "updatedAt": "2024-02-27T07:43:47.369Z",
-  //     "__v": 0
-  //   }
-  // ]
+
   const [customers, setCustomers] = useState([])
   const getCustomers = async () => {
     const response = await axios.get('http://localhost:5000/api/user/all')
@@ -84,10 +62,11 @@ export default function Customer() {
 
   const deleteUser = async () => {
     const User_id = currentId
-    const response = await axios.post('http://localhost:5000/api/user/delete', User_id)
-    console.log(response.data)
-    console.log(User_id)
+    const response = await axios.post('http://localhost:5000/api/user/delete', {User_id})
+    // console.log(response.data)
+    // console.log(User_id)
     setShowModal(true)
+    getCustomers()
   }
   return (
     <>
@@ -117,9 +96,9 @@ export default function Customer() {
                         <option value="">Order</option>
                         <option value="">Rupee</option>
                       </select> */}
-                      <input type="text"
+                      {/* <input type="text"
                         placeholder='Search for User!'
-                        className='btn btn-light d-inline border ms-auto ' />
+                        className='btn btn-light d-inline border ms-auto ' /> */}
                     </div>
 
                   </div>
@@ -148,7 +127,7 @@ export default function Customer() {
                                       <small className='font-light-thick'>{item.email}</small>
                                     </div>
                                   </td>
-                                  <td>{item.order.length}</td>
+                                  <td>{item?.order?.length}</td>
                                   <td>{item.number}</td>
                                   <td className='align-items-center'>
                                     <button className='d-inline btn btn-outline-danger btn-sm me-2' onClick={() => { setShowModal(false); setCurrentId(`${item._id}`) }}>Delete</button>

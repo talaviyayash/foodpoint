@@ -11,24 +11,25 @@ const Login = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [details, setDetails] = useState({});
+    const [details, setDetails] = useState("");
 
-    const data = {
-        email: email,
-        password: password,
-    }
+   
 
     const getdata = async () => {
+        const data = {
+            email: email,
+            password: password,
+        }
         try {
+            setDetails('')
             const response = await axios.post('http://localhost:5000/api/admin/signin', data,{withCredentials:true});
             if (response.data.login === true) {
-                // console.log(response)
-                // console.log(response.data)
                 dispatch(setAdminDetails(response.data))
                 navigate('/Dashboard')
             }
             else {
-                alert("Your Email Id and Password are incorrect!")
+                console.log(response.data)
+                setDetails("Your Email Id and Password are incorrect!")
             }
         } catch (error) {
             console.log('Error fetching data:' , error);
@@ -66,6 +67,7 @@ const Login = () => {
                             required
                         />
                     </div>
+                    <p className='text-danger'>{details}</p>
                     <button type="submit" className='w-100 mt-2 py-2 btn btn-outline-danger'>Log In</button>
                 </form>
             </div>

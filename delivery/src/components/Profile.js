@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-
+import axios from 'axios'
 export default function Profile() {
 
   const [changeDetail, setChageDetail] = useState(true)
+  const logout = async() => {
+    const response = await axios.post('http://localhost:5000/api/logout/logout', {},{ withCredentials: true});
+    console.log(response.data);
+    window.location.reload();
+  }
 
   return (
     <>
@@ -20,12 +25,12 @@ export default function Profile() {
 
             <div className=' px-4'>
               <p className='py-2 ps-3 fw-medium border border-2 border-dark rounded rounded-5' onClick={()=>setChageDetail(true)}>Profile</p>
-              <p className='py-2 ps-3 fw-medium border border-2 border-dark rounded rounded-5' onClick={()=>setChageDetail(false)}>Restaurant</p><hr className='border border-2 border-dark' />
+              {/* <p className='py-2 ps-3 fw-medium border border-2 border-dark rounded rounded-5' onClick={()=>setChageDetail(false)}>Deivery Boy</p><hr className='border border-2 border-dark' /> */}
 
               {/* <p className='py-2 ps-3 fw-medium border rounded rounded-5' style={{ backgroundColor: 'rgb(226, 232, 240)' }}>Update Profile</p>
               <p className='py-2 ps-3 fw-medium border rounded rounded-5' style={{ backgroundColor: 'rgb(226, 232, 240)' }}>Change Password</p> */}
-              <p className='py-2 ps-3 fw-medium border rounded rounded-5' style={{ backgroundColor: 'rgb(226, 232, 240)' }}>Logout</p>
-            </div>
+              <p className='py-2 ps-3 fw-medium border rounded rounded-5' onClick={logout} style={{ backgroundColor: 'rgb(226, 232, 240)' }}>Logout</p>
+            </div>  
           </div>
 
           <div className="col-9 ">
@@ -55,7 +60,7 @@ export default function Profile() {
                 <div className="row">
 
                   {/* BANK DETAILS */}
-                  <div className="col-6 mt-3">
+                  {/* <div className="col-6 mt-3">
                     <div className="row m-0 py-3 border-bottom border-3 border-warning rounded-top rounded-top-4 " style={{ backgroundColor: 'rgb(173, 179, 187)' }}>
                       <h3>Bank details</h3>
                     </div>
@@ -74,10 +79,10 @@ export default function Profile() {
                         <div className="col-7  rounded rounded-2 fw-bold text-secondary" style={{ backgroundColor: 'rgb(231, 236, 242)' }}><p className=' m-0 py-2' >Current</p></div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* PAN CARD DETAILS */}
-                  <div className="col-6 mt-3">
+                  {/* <div className="col-6 mt-3">
                     <div className="row m-0 py-3 border-bottom border-3 border-warning rounded-top rounded-top-4 " style={{ backgroundColor: 'rgb(173, 179, 187)' }}>
                       <h3>Pan Card details</h3>
                     </div>
@@ -96,7 +101,7 @@ export default function Profile() {
                         <div className="col-7  rounded rounded-2 fw-bold text-secondary" style={{ backgroundColor: 'rgb(231, 236, 242)' }}><p className=' m-0 py-2' >ACTIVE</p></div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                 </div>
               </>

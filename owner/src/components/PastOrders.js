@@ -18,7 +18,7 @@ export default function PastOrders() {
   const getOrderDetail = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/order/historyRestaurants",
+        "https://foodpoint-backend-je3y.onrender.com/api/order/historyRestaurants",
         { Restaurant_id }
       );
       setOrders(response.data.orderInfo);
@@ -54,7 +54,7 @@ export default function PastOrders() {
           </thead>
 
           <tbody className="">
-            {orders.map((item,index) => {
+            {orders.map((item, index) => {
               return (
                 <>
                   <tr className="" key={index}>

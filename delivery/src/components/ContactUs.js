@@ -17,7 +17,7 @@ export default function ContactUs() {
       from: "delivery",
     };
     const response = await axios.post(
-      "http://localhost:5000/api/contactus/create",
+      "https://foodpoint-backend-je3y.onrender.com/api/contactus/create",
       data,
       { withCredentials: true }
     );
@@ -127,7 +127,12 @@ export default function ContactUs() {
                     <button
                       type="submit"
                       className="btn btn-primary mt-4 w-100 py-2 rounded rounded-3"
-                      disabled={name.trim()===''||email.trim()===''||num.trim()===''||message.trim()===''}
+                      disabled={
+                        name.trim() === "" ||
+                        email.trim() === "" ||
+                        num.trim() === "" ||
+                        message.trim() === ""
+                      }
                     >
                       Send Message
                     </button>

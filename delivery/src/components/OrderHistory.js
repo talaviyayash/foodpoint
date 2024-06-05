@@ -4,17 +4,19 @@ import Footer from "./Footer";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 export default function OrderHistory() {
-  const DeliveryBoy_id = useSelector((state) => state?.deliver?.deliverInfo?.deliveryBoyInfo?._id);
-  const navigate = useNavigate()    
+  const DeliveryBoy_id = useSelector(
+    (state) => state?.deliver?.deliverInfo?.deliveryBoyInfo?._id
+  );
+  const navigate = useNavigate();
   const [orderHistory, setOrderHistory] = useState([]);
   const [orderAccept, setOrderAccept] = useState([]);
 
   const acceptedOrder = async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/order/acceptedForOrder",
+      "https://foodpoint-backend-je3y.onrender.com/api/order/acceptedForOrder",
       { DeliveryBoy_id }
     );
     setOrderAccept(response.data.orderInfo);
@@ -22,7 +24,7 @@ export default function OrderHistory() {
   };
   const orderInfo = async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/order/acceptedForOrder",
+      "https://foodpoint-backend-je3y.onrender.com/api/order/acceptedForOrder",
       { DeliveryBoy_id }
     );
     setOrderHistory(response.data.orderInfo);
@@ -30,12 +32,12 @@ export default function OrderHistory() {
   };
   const doneOrder = async (id) => {
     const response = await axios.post(
-        "http://localhost:5000/api/order/updateOrderStatus",
-        { Order_id:id , status: "done" }
-      );
-      orderInfo()
-      // console.log(response.data);
-  }
+      "https://foodpoint-backend-je3y.onrender.com/api/order/updateOrderStatus",
+      { Order_id: id, status: "done" }
+    );
+    orderInfo();
+    // console.log(response.data);
+  };
   useEffect(() => {
     orderInfo();
     // acceptedOrder();
@@ -65,22 +67,34 @@ export default function OrderHistory() {
             </thead>
             <tbody>
               {orderHistory.map((item, index) => {
-                if(!(item.status === "done") && !(item.status === "cancel") ){
-                return (
-                  <tr key={index} className="">
-                    <td>{item._id}</td>
-                    <td>{item.user}</td>
-                    <td>{item?.products?.quantity}</td>
-                    <td>{item.total}</td>
-                    <td>{item.status}</td>
-                    <td>
-                      <div className="d-flex">
-                        <button onClick={()=> doneOrder(item._id)}  className='btn btn-sm btn-outline-success me-1'>Done</button>
-                        <button className='btn btn-sm btn-outline-dark' onClick={()=>navigate(`/Orderdetails/${item._id}`)}>View</button>
-                      </div>
-                    </td    >
-                  </tr>
-                );
+                if (!(item.status === "done") && !(item.status === "cancel")) {
+                  return (
+                    <tr key={index} className="">
+                      <td>{item._id}</td>
+                      <td>{item.user}</td>
+                      <td>{item?.products?.quantity}</td>
+                      <td>{item.total}</td>
+                      <td>{item.status}</td>
+                      <td>
+                        <div className="d-flex">
+                          <button
+                            onClick={() => doneOrder(item._id)}
+                            className="btn btn-sm btn-outline-success me-1"
+                          >
+                            Done
+                          </button>
+                          <button
+                            className="btn btn-sm btn-outline-dark"
+                            onClick={() =>
+                              navigate(`/Orderdetails/${item._id}`)
+                            }
+                          >
+                            View
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
                 }
               })}
             </tbody>
@@ -107,16 +121,17 @@ export default function OrderHistory() {
             </thead>
             <tbody>
               {orderHistory.map((item, index) => {
-                if(item.status === "done" || item.status === "cancel" ){
-                return (
-                  <tr key={index} className="">
-                    <td>{item._id}</td>
-                    <td>{item.user}</td>
-                    <td>{item.products.quantity}</td>
-                    <td>{item.total}</td>
-                    <td>{item.status}</td>
-                  </tr>
-                );}
+                if (item.status === "done" || item.status === "cancel") {
+                  return (
+                    <tr key={index} className="">
+                      <td>{item._id}</td>
+                      <td>{item.user}</td>
+                      <td>{item.products.quantity}</td>
+                      <td>{item.total}</td>
+                      <td>{item.status}</td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>

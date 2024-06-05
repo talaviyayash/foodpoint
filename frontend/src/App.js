@@ -19,18 +19,20 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login = useSelector((state) => state?.user?.login);
-  const userInfo = useSelector((state) => state?.user?.userInfo?.userInfo?.isVerified);
+  const userInfo = useSelector(
+    (state) => state?.user?.userInfo?.userInfo?.isVerified
+  );
   // console.log(userInfo)
   const refresh = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/refresh",
+        "https://foodpoint-backend-je3y.onrender.com/api/user/refresh",
         {},
         { withCredentials: true }
       );
 
       if (response.data.login === true) {
-       dispatch(setUserDetails(response.data));
+        dispatch(setUserDetails(response.data));
       }
     } catch (error) {
       console.log("Error fetching data:");
